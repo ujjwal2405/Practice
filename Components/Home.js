@@ -10,12 +10,26 @@ import {
   TouchableOpacity, 
 } from 'react-native';
 
+import Modal from 'react-native-modal';
+
 
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+        isModalVisible: false,
+        img:require('../src/Assets/Man.jpg')
+        
+    }
   }
+  toggleModal = () => {
+    this.setState({
+      isModalVisible: !this.state.isModalVisible
+    });
+  };
+
+ 
 
   render() {
     return (
@@ -52,10 +66,14 @@ class Home extends React.Component {
           </View>
          </View>
         <View>
-        <Image
+         
+         <TouchableOpacity
+         onPress={this.toggleModal}>
+         <Image
         style={styles.ProfileImg}
-        source={require('../src/Assets/DefaultProfile.png')}
+        source={this.state.img}
             />
+        </TouchableOpacity>
         </View>
           </View>
 
@@ -248,7 +266,43 @@ class Home extends React.Component {
           
   {/* This Whole Section Comprises of a single entity Track Order */}        
           
-          
+        <Modal isVisible={this.state.isModalVisible}
+        hasBackdrop={true}>
+          <SafeAreaView style={{ flex:1,backgroundColor:"white",marginTop:50 }}>
+            <View style={{flexDirection:"row"}}>
+            <Text>Profilea</Text>
+            <TouchableOpacity>
+            <Image
+            source={require('../src/Assets/Profilea.jpg')}
+            style={styles.ModalImageStyle}
+             />
+             </TouchableOpacity>
+            </View>
+
+            <View style={{flexDirection:"row"}}>
+            <Text>Profileb</Text>
+            <TouchableOpacity
+            onPress={this.setState({
+                img:require('../src/Assets/Profileb.jpg')
+            })}>
+            <Image
+            source={require('../src/Assets/Profileb.jpg')}
+            style={styles.ModalImageStyle}
+             />
+            </TouchableOpacity>
+            </View>
+
+            <View style={{flexDirection:"row"}}>
+            <Text>Profilec</Text>
+            <Image
+            source={require('../src/Assets/Profilec.jpg')}
+            style={styles.ModalImageStyle}
+             />
+            
+            </View>
+
+          </SafeAreaView>
+        </Modal>
           </View>
           </SafeAreaView>
     );
@@ -272,7 +326,8 @@ const styles = StyleSheet.create({
     height:100,
     width:100,
     marginRight:20,
-    marginBottom:20
+    marginBottom:20,
+    borderRadius:500/2
   },
   LinkContent:{
     marginLeft:20,
@@ -301,6 +356,9 @@ const styles = StyleSheet.create({
     marginLeft:-20,
     opacity:0.2,
     marginTop:30
+  },
+  ModalImageStyle:{
+    height:200,width:150,marginLeft:40,marginTop:20
   }
 });
 export default Home;
@@ -316,3 +374,9 @@ export default Home;
 source={require('../src/Assets/Profile2.png')}
 />
 </View> */}
+
+
+
+
+
+    
