@@ -10,11 +10,39 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {Dropdown} from 'react-native-material-dropdown';
+
 class MyCart extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
+    let quantity = [
+      {
+        value: 1,
+      },
+      {
+        value: 2,
+      },
+      {
+        value: 3,
+      },
+    ];
+
+    let SizeofCloth = [
+      {
+        value: 'S',
+      },
+      {
+        value: 'M',
+      },
+      {
+        value: 'L',
+      },
+      {
+        value: 'XL',
+      },
+    ];
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.MyCart}>
@@ -42,36 +70,56 @@ class MyCart extends React.Component {
         </View>
 
         <View style={styles.PurchaseSection}>
-        
-        <View >
-        <Image
+          <View>
+            <Image
               source={require('../src/Assets/Man.jpg')}
               style={styles.DisplayPic}
             />
+          </View>
+
+          <View style={{marginLeft: 10}}>
+            <Text style={styles.DressName}>Tasso Elba</Text>
+            <Text>Men's Pallo Cardigan Sweater, Ether</Text>
+
+            <Text style={styles.DressSize}>AED 52</Text>
+            <View style={styles.PurchaseAttributes}>
+              <View style={{width: 70, color: 'black'}}>
+                <Dropdown
+                  label="QTY:"
+                  data={quantity}
+                  value={1}
+                  itemColor="black"
+                  textColor="black"
+                />
+              </View>
+
+              <View style={{width: 40, color: 'black', marginLeft: 40}}>
+                <Dropdown
+                  label="SIZE"
+                  data={SizeofCloth}
+                  value={'XL'}
+                  itemColor="black"
+                  textColor="black"
+                />
+              </View>
+            </View>
+          </View>
         </View>
-        
-        <View style={{marginLeft:10}}>
-        <Text style={styles.DressName}>Tasso Elba</Text>
-        <Text>Men's Pallo Cardigan Sweater, Ether</Text>
-        
-        <Text style={styles.DressSize}>AED 52</Text>
-        <View style={styles.PurchaseAttributes}>
-            <Text>QTY:</Text>
-            <Text style={{marginLeft:8}}>1</Text>
-            <TouchableOpacity>
-            <Image
-             source={require('../src/Assets/DownChevron.png')}
-             style={{height:20,width:10,marginLeft:7}}/>
-            </TouchableOpacity>
-            <Text style={{marginLeft:40}}>SIZE:</Text>
-            <Text style={{marginLeft:8}} >XL</Text>
-            <TouchableOpacity>
-            <Image
-             source={require('../src/Assets/DownChevron.png')}
-             style={{height:20,width:10,marginLeft:7}}/>
-             </TouchableOpacity>
-        </View>
-        </View>
+
+        <View style={{width: '100%', height: 1, backgroundColor: 'grey'}} />
+
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity>
+            <View style={styles.SaveForLater}>
+              <Text>SAVE FOR LATER</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <View style={styles.Remove}>
+              <Text style={{color: 'red'}}>Remove</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -117,17 +165,38 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginLeft: 20,
   },
-  PurchaseSection:{
-      flexDirection:"row",
-      marginTop:20,
-      marginLeft:10
-    },
-    DisplayPic:{
-        height:120,
-        width:80
-    },
-    DressName:{fontWeight:"600",color:"black"},
-    DressSize:{marginTop:30,fontSize:17},
-    PurchaseAttributes:{flexDirection:"row",marginTop:20}
+  PurchaseSection: {
+    flexDirection: 'row',
+    marginTop: 20,
+    marginLeft: 10,
+  },
+  DisplayPic: {
+    height: 150,
+    width: 100,
+  },
+  DressName: {fontWeight: '600', color: 'black'},
+  DressSize: {
+    marginTop: 30,
+    fontSize: 17,
+  },
+  PurchaseAttributes: {flexDirection: 'row'},
+  SaveForLater: {
+    borderWidth: 1.5,
+    borderColor: 'black',
+    width: 150,
+    height: 50,
+    marginLeft: 20,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Remove:{
+    width: 150,
+    height: 50,
+    marginLeft: 20,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 export default MyCart;
