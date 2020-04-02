@@ -121,6 +121,27 @@ class MyCart extends React.Component {
             </View>
           </TouchableOpacity>
         </View>
+
+        <View style={{backgroundColor: '#DCDCDC',marginTop:20}}>
+          <View style={styles.LoyaltyPoints}>
+            <Text>Sign In to earn loyality points</Text>
+          </View>
+        
+        <View style={{flexDirection:"row"}}>
+        <View style={{flex:1}}>
+        <Image
+              source={require('../src/Assets/Truck.png')}
+              style={{height:50,width:50}}/>
+        <Text>FREE SHIPPING</Text>
+        <Text>On all orders above AED 250</Text>
+        </View>
+
+        </View>
+        
+        
+        
+        
+        </View>
       </SafeAreaView>
     );
   }
@@ -190,13 +211,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  Remove:{
+  Remove: {
     width: 150,
     height: 50,
     marginLeft: 20,
     marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  LoyaltyPoints: {
+    width: '100%',
+    backgroundColor: '#f7f7a1',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
+    marginTop: 8,
+  },
 });
 export default MyCart;

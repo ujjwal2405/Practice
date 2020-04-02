@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Components/Home'
 import MyCart from './Components/MyCart';
-
+import Camera from './Components/Camera'
 
 
 
@@ -36,6 +36,7 @@ function MyTabs() {
     }}>
       <Tab.Screen name="Account" component={Home} />
       <Tab.Screen name="My Cart" component={MyCart} />
+     
     </Tab.Navigator>
   );
 }

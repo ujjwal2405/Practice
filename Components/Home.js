@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+ import ImagePicker from 'react-native-image-picker'
 
 import Modal from 'react-native-modal';
 import { RNCamera } from 'react-native-camera';
@@ -26,6 +27,54 @@ class Home extends React.Component {
       isModalVisible: !this.state.isModalVisible,
     });
   };
+
+
+
+  launchImageLibrary = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        const source = { uri: response.uri };
+        console.log('response', JSON.stringify(response));
+        this.setState({
+          filePath: response,
+          fileData: response.data,
+          fileUri: response.uri
+        });
+      }
+    });
+
+  }
+
+  renderFileUri() {
+    if (this.state.fileUri) {
+      return <Image
+        source={{ uri: this.state.fileUri }}
+        style={styles.ProfileImg}
+      />
+    } else {
+      return <Image
+        source={require('../src/Assets/Man.jpg')}
+        style={styles.ProfileImg}
+      />
+    }
+  }
+
 
 
 
@@ -65,8 +114,8 @@ class Home extends React.Component {
               </View>
             </View>
             <View>
-              <TouchableOpacity onPress={this.toggleModal}>
-                <Image style={styles.ProfileImg} source={this.state.img} />
+              <TouchableOpacity onPress={this.launchImageLibrary}>
+               {this.renderFileUri()}
               </TouchableOpacity>
             </View>
           </View>
@@ -284,6 +333,7 @@ class Home extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
