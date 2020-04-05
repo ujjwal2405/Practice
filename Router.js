@@ -1,11 +1,12 @@
-import  React from 'react';
+import  React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Components/Home'
 import MyCart from './Components/MyCart';
 import Camera from './Components/Camera'
-
+import Account from './Components/Account'
+import Test from "./Components/Test"
 
 
 const Tab = createBottomTabNavigator();
@@ -31,12 +32,14 @@ function MyTabs() {
       },
     })}
     tabBarOptions={{
-      activeTintColor: 'blue',
+      activeTintColor: 'red',
       inactiveTintColor: 'black',
     }}>
-      <Tab.Screen name="Account" component={Home} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="My Cart" component={MyCart} />
-     
+      <Tab.Screen name="Camera" component={Camera} />
+      <Tab.Screen name="Account" component={Account} />
+    
     </Tab.Navigator>
   );
 }
