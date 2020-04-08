@@ -39,6 +39,7 @@ function MyTabs() {
       <Tab.Screen name="My Cart" component={MyCart} />
       <Tab.Screen name="Camera" component={Camera} />
       <Tab.Screen name="Account" component={Account} />
+      <Tab.Screen name="Test" component={Test} />
     
     </Tab.Navigator>
   );
