@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 
-class Test extends React.Component{
+class Postapi extends React.Component{
     constructor(props){
         super(props)
         this.state={
@@ -22,7 +22,20 @@ class Test extends React.Component{
     }
 
     componentDidMount(){
-        return fetch('https://jsonplaceholder.typicode.com/posts')
+
+        fetch('https://admin-stage-temp.priskoll.occdev.axfood.se/axfood/axfood-security/login', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstParam: 'yourValue',
+    secondParam: 'yourOtherValue',
+  }),
+});
+
+        return fetch('https://admin-stage-temp.priskoll.occdev.axfood.se/axfood/axfood-security/login')
         .then(response => response.json())
         .then(responseJson =>{
             this.setState({
@@ -54,7 +67,7 @@ DisplayData =()=>{
               return (
             <View style={{flex:1}}>
                 <Text style={{marginTop:10,fontSize:20}}>
-                    {item.title}
+                    {item.id}
                 </Text>
             </View>
               );
@@ -88,7 +101,7 @@ const styles = StyleSheet.create({
       padding: 10
     }
   });
-export default Test
+export default Postapi
 
 
 

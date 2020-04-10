@@ -6,8 +6,9 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-
+import Home from '../Components/Home'
 import {Dropdown} from 'react-native-material-dropdown';
 import {TextInput, TouchableHighlight} from 'react-native-gesture-handler';
 import RadioForm, {
@@ -15,6 +16,7 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+import { ThemeProvider } from '@react-navigation/native';
 class Account extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,8 @@ class Account extends React.Component {
       secure: true,
       visible: 'Show',
       toggle: true,
+      uname:'',
+      psswd:''
     }),
       (numbers = [
         {
@@ -46,10 +50,13 @@ class Account extends React.Component {
   RenderLogin = () => {
     return (
       <View style={{flex: 1}}>
-        <TextInput style={styles.EmailStyle} placeholder="Your Email Address" />
+        <TextInput 
+        onChangeText={uname=>this.setState({uname})}
+        style={styles.EmailStyle} placeholder="Your Email Address" />
 
         <View style={styles.PasswordStyle}>
           <TextInput
+          onChangeText={psswd=>this.setState({psswd})}
             placeholder="Password"
             style={{height: 50, padding: 10, width: '80%'}}
             secureTextEntry={this.state.secure}></TextInput>
@@ -73,7 +80,9 @@ class Account extends React.Component {
         </View>
 
         <View style={styles.SignIn}>
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={()=>this.onSignIn()}
+          >
             <Text style={{color: 'white', fontSize: 17}}>Sign In</Text>
           </TouchableOpacity>
         </View>
@@ -213,6 +222,39 @@ class Account extends React.Component {
     );
   };
 
+  onSignIn=()=>{
+    fetch('https://admin-stage-temp.priskoll.occdev.axfood.se/axfood/axfood-security/login', {
+      method: 'POST',
+      body: JSON.stringify({
+          username:this.state.uname,
+          password:this.state.psswd
+      }),
+    })
+    .then(response=>{
+      if(response.status!=200){
+        return(
+          Alert.alert(
+            'Something Went Wrong',
+            'Wrong username or password',
+            [
+              
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            { cancelable: false }
+          )
+        )
+      }
+      else{
+        this.props.navigation.navigate('Home')
+      return response.json();
+    }
+    })
+    .then(responseJson=>{
+      
+     })
+  }  
+
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
@@ -234,7 +276,7 @@ class Account extends React.Component {
             <Text style={{marginRight: 35, fontSize: 25}}>Join</Text>
           </TouchableOpacity>
         </View>
-        {this.state.toggle ? <this.RenderJoin /> : <this.RenderLogin />}
+        {this.state.toggle ? this.RenderLogin() : this.RenderJoin() }
       </SafeAreaView>
     );
   }

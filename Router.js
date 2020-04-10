@@ -7,7 +7,7 @@ import MyCart from './Components/MyCart';
 import Camera from './Components/Camera'
 import Account from './Components/Account'
 import Test from "./Components/Test"
-
+import Postapi from "./Components/Postapi"
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +39,7 @@ function MyTabs() {
       <Tab.Screen name="My Cart" component={MyCart} />
       <Tab.Screen name="Camera" component={Camera} />
       <Tab.Screen name="Account" component={Account} />
-      <Tab.Screen name="Test" component={Test} />
+      <Tab.Screen name="Post" component={Postapi} />
     
     </Tab.Navigator>
   );
